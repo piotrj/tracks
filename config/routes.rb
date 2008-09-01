@@ -57,6 +57,12 @@ ActionController::Routing::Routes.draw do |map|
   
   map.preferences 'preferences', :controller => 'preferences', :action => 'index'
   map.integrations 'integrations', :controller => 'integrations', :action => 'index'
+  
+  map.calendar '/calendar/:year/:month/:day', :controller => 'calendar_view',
+    :year => nil,
+    :month => nil,
+    :day => nil
+  
 
   map.resources :recurring_todos,
     :member => {:toggle_check => :put, :toggle_star => :put}

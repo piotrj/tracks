@@ -1198,3 +1198,70 @@ body.integrations textarea {
 {
 	float: right;
 }
+
+/* Calendar view styles */
+h1.calendar_heading {
+	text-align: center;
+	font-size: 18px;
+	color: #383A3B;
+}
+
+.calendar_table
+{
+	margin-top: 10px;
+	width: 100%;
+}
+
+.day_cell
+{
+	border: 1px solid #5E6368;
+	padding: 2px;
+	height: 60px;	
+	vertical-align: top;
+	background: white;
+	width: 14%;
+	
+}
+
+.day_number
+{
+	float: left;
+	font-size: 10px;
+}
+
+.this_month .day_number
+{
+	color: #616161;
+}
+
+.other_month .day_number
+{
+	color: #ADADAD;
+}
+
+.today
+{
+	background-color: #B7D8FC;
+}
+
+.selected
+{
+	background-color: #F0A189;
+}
+
+.calendar_header
+{
+	font-size: 11px;
+	color: #616161;
+}
+
+.calendar_header th
+{
+	text-align: center;
+}
+
+.calendar_heading a.navigation
+{
+	font-size: 10px;
+	color: #616161;
+}
