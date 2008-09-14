@@ -6,7 +6,8 @@ class Calendar
     @year   = (options[:year]  || Date.today.year).to_i
     @day    = options[:day].to_i
     @days   = Array.new
-    @todos_que  = options[:todos] || Array.new
+    @todos_que = Array.new
+    # @todos_que  = options[:todos] || Array.new
     
     initiate_days
   end
@@ -29,32 +30,30 @@ class Calendar
   end
   
   def initiate_days
-    @todos_que = @todos_que.sort do |x,y| 
-      y.due <=> x.due
-    end
+    @todos_que = Todo.find(:all, :conditions => ["due > ? and due < ?", first_calendar_day, last_calendar_day], :order => "due")
     
     first_calendar_day.upto(last_calendar_day) do |date|
       day = Day.new(date, determine_day_type(date))
-      while !@todos_que.last.nil? and @todos_que.last.due == day.date
-        day.add_todo(@todos_que.pop)
+      while !@todos_que.last.nil? and @todos_que.first.due == day.date
+        day.add_todo(@todos_que.shift)
       end
       @days << day
     end
   end
   
   def determine_day_type(date)
-    if date.month == @month
-      if date.day == @day
-        "selected"
-      else
-        if date.day == Date.today.day and date.month == Date.today.month and date.month == Date.today.year
-          "today"
+    if date == Date.today
+      "today"
+    else
+      if date.month == @month and date.year == @year
+        if date.day == @day
+          "selected"
         else
           "this_month"
         end
+      else
+        "other_month"
       end
-    else
-      "other_month"
     end
   end
   
@@ -93,7 +92,8 @@ class Calendar
 end
 
 class Day
-  attr_reader :type, :date
+  include ActionView::Helpers::TextHelper
+  attr_reader :type, :date, :todos
   
   def initialize(date, type)
     @date = date
@@ -103,11 +103,5 @@ class Day
   
   def add_todo(todo)
     @todos << todo
-  end
-  
-  def to_html
-    html = %(<td class="#{["day_cell ", @type].join}">)
-    html << %(<span class="day_number">#{@date.day}</span>)
-    html << %(</td>\n)
   end
 end

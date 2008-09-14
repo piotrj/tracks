@@ -1,0 +1,21 @@
+<div class ="calendar_view">
+	<h1 class="calendar_heading">
+		<%= link_to "&lt;&lt;", calendar_url(calendar.previous_year), :class => "navigation" %>
+		<%= link_to "&lt;", calendar_url(calendar.previous_month), :class => "navigation"%>
+			<%= h(calendar.month_name) %> <%= h(calendar.year) %>
+		<%= link_to "&gt;", calendar_url(calendar.next_month), :class => "navigation"%>
+		<%= link_to "&gt;&gt;", calendar_url(calendar.next_year), :class => "navigation"%>
+	</h1>
+	<table class="calendar_table">
+		<tr class="calendar_header">
+			<% calendar.day_names.each do |day_name| %>
+				<th><%= day_name %></th>
+			<% end %>
+		</tr>
+		<% calendar.days.collect_every(7) do |week_days| %>
+	  	<tr>
+	      <%= render :partial => "day", :collection => week_days %>
+	    </tr>
+    <% end %>
+	</table>
+</div>

@@ -1,29 +1,3 @@
 <div id="display_box">
-	<% if false %>
-	<%= @calendar.to_html %>
-	<%= debug @year%>
-	<% end %>
-	<div class ="calendar_view">
-		<h1 class="calendar_heading">
-			<%= link_to "<<", calendar_url(@calendar.previous_year), :class => "navigation" %>
-			<%= link_to "<", calendar_url(@calendar.previous_month), :class => "navigation"%>
-				<%= h(@calendar.month_name) %> <%= h(@calendar.year) %>
-			<%= link_to ">", calendar_url(@calendar.next_month), :class => "navigation"%>
-			<%= link_to ">>", calendar_url(@calendar.next_year), :class => "navigation"%>
-		</h1>
-		<table class="calendar_table">
-			<tr class="calendar_header">
-				<% @calendar.day_names.each do |day_name| %>
-					<th><%= day_name %></th>
-				<% end %>
-			</tr>
-			<% @calendar.days.collect_every(7) do |week_days| %>
-		  	<tr>
-		      <% week_days.each do |day| %>
-		        <%= day.to_html %>
-		      <% end %>
-		    </tr>
-	    <% end %>
-		</table>
-	</div>
+	<%= render :partial => "calendar", :target => @calendar %>
 </div>

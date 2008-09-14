@@ -1225,7 +1225,7 @@ h1.calendar_heading {
 
 .day_number
 {
-	float: left;
+	text-align: left;
 	font-size: 10px;
 }
 
@@ -1264,4 +1264,27 @@ h1.calendar_heading {
 {
 	font-size: 10px;
 	color: #616161;
+}
+
+ul.todo_list
+{
+	text-align: right;
+}
+ul.todo_list li
+{
+	
+	font-size: 9px;
+}
+
+.day_cell div.todos_count
+{
+	padding-top: 10px;
+	padding-right: 5px;
+	text-align: right;
+	color: #520202;
+}
+
+.day_cell:hover
+{
+	background-color: #FCC6B0;
 }

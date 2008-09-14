@@ -1,0 +1,10 @@
+<td class=" <%= ["day_cell ", day.type].join %> ">
+	<div class="day_number"><%= day.date.day %></div>
+
+<% unless day.todos.empty? %> 
+	<div class = "todos_count">
+		<%= day.todos.size %> <%= count_pluralize(day.todos.size, "todo") %>
+	</div>
+<% end %>
+  
+</td>
